@@ -4,7 +4,6 @@ services:
     container_name: vue-rails-sample
     tty: true
     stdin_open: true
-    image: dofa-app
     volumes: 
       - "./.:/app/vue-rails-sample:cached"
       - vendor:/app/vue-rails-sample/vendor
