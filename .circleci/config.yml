@@ -10,9 +10,9 @@ jobs:
           DATABASE_USERNAME: root
           DATABASE_PASSWORD: ''
           DATABASE_HOST: 127.0.0.1
-      - image: mysql:5.7
+      - image: circleci/mysql:5.7
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
           MYSQL_USER: root
           MYSQL_ROOT_HOST: "%"
           MYSQL_HOST: 127.0.0.1
