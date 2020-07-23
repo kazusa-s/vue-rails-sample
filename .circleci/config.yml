@@ -1,15 +1,64 @@
 version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
 
 jobs:
   build:
+    working_directory: ~/vue-rails-sample
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+      - image: ruby:2.7.1-alpine3.12
+        environment:
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
+          DATABASE_USERNAME: root
+          DATABASE_PASSWORD:
+          DATABASE_HOST: 127.0.0.1
+      - image: mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_USER: root
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_HOST: 127.0.0.1
     steps:
       - checkout
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: install package # 必要なパッケージをalpineにインストール
+          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget"
+      - run:
+          name: set timezone
+          command: "cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime"
+      - run:
+          name: install nodejs
+          command: |
+            curl -sSL "https://nodejs.org/dist/v10.21.0/node-v10.21.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.21.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+
+      - run: gem install bundler -v 1.3.0
+      
+      - restore-cache:
+          keys:
+            - rails-dependency-gem-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: bundle install
+          command: |
+            bundle config set path "vendor/bundle"
+            bundle check || bundle instal
+      - save_cache:
+          key: rails-dependency-gem-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - restore-cache:
+          keys:
+            - v1-yarn-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save-cache:
+          key: v1-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.
+      - run: dockerize -wait tcp://localhost:3306 -timeout 1m
+      - run: bundle exec rails db:create
+      - run: bundle exec rails db:migrate
