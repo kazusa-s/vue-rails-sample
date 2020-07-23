@@ -28,8 +28,8 @@ jobs:
       - run:
           name: install nodejs
           command: |
-            curl -sSL "https://nodejs.org/dist/v10.21.0/node-v10.21.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.21.0-linux-x64/bin/node
-            curl https://www.npmjs.com/install.sh | sudo bash
+            curl -sSL "https://nodejs.org/dist/v10.21.0/node-v10.21.0-linux-x64.tar.xz" | tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.21.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | bash
 
       - run: gem install bundler -v 1.3.0
 
