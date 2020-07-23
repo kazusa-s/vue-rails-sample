@@ -21,7 +21,7 @@ jobs:
       - checkout
       - run:
           name: install package # 必要なパッケージをalpineにインストール
-          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget"
+          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget nodejs"
       - run:
           name: set timezone
           command: "cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime"
