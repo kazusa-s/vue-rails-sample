@@ -55,4 +55,4 @@ jobs:
       - run: bundle exec rails db:create
       - run: bundle exec rails db:migrate
 
-      - run: bundle exec rubocop --profile 10 --format progress
+      - run: bundle exec rubocop
