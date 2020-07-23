@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/vue-rails-sample
     docker:
-      - image: ruby:2.7.1-alpine3.12-node
+      - image: ruby:2.7.1-alpine3.12
         environment:
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
@@ -21,13 +21,14 @@ jobs:
       - checkout
       - run:
           name: install package # 必要なパッケージをalpineにインストール
-          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget"
+          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget nodejs"
       - run:
           name: set timezone
           command: "cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime"
       - run:
           name: install nodejs
           command: |
+            node -v
             curl -sSL "https://nodejs.org/dist/v10.21.0/node-v10.21.0-linux-x64.tar.xz" | tar --strip-components=2 -xJ -C /usr/local/bin/ node-v10.21.0-linux-x64/bin/node
             curl https://www.npmjs.com/install.sh | bash
 
