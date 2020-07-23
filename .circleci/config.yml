@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/vue-rails-sample
     docker:
-      - image: ruby:2.7.1-alpine3.12
+      - image: ruby:2.7.1-alpine3.12-node
         environment:
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
@@ -21,7 +21,7 @@ jobs:
       - checkout
       - run:
           name: install package # 必要なパッケージをalpineにインストール
-          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget nodejs"
+          command: "set -e && apk update && apk add --no-cache bash tzdata mysql-client mysql-dev yarn vim build-base curl wget"
       - run:
           name: set timezone
           command: "cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime"
