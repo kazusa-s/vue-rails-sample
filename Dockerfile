@@ -24,14 +24,7 @@ RUN set -e && \
       yarn \
       vim && \
     apk add --update --no-cache --virtual=build-dependencies \
-      build-base \
-      curl-dev \
-      linux-headers \
-      libxml2-dev \
-      libxslt-dev \
-      ruby-dev \
-      yaml-dev \
-      zlib-dev && \
+      build-base && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     gem install bundler -v 1.3.0 && \
     bundle config set path 'vendor/bundle' && \
