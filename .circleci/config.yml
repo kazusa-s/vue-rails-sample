@@ -32,8 +32,8 @@ jobs:
             curl https://www.npmjs.com/install.sh | sudo bash
 
       - run: gem install bundler -v 1.3.0
-      
-      - restore-cache:
+
+      - restore_cache:
           keys:
             - rails-dependency-gem-{{ checksum "Gemfile.lock" }}
       - run:
@@ -46,14 +46,15 @@ jobs:
           paths:
             - vendor/bundle
 
-      - restore-cache:
+      - restore_cache:
           keys:
             - v1-yarn-{{ checksum "yarn.lock" }}
       - run: yarn install
-      - save-cache:
+      - save_cache:
           key: v1-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+
       - run:
           name: install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
