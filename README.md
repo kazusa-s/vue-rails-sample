@@ -21,18 +21,20 @@
 
 - Setup
 
-`docker-compose up`
+  `docker-compose up`
 
 if you want to activate webpack-dev-server
 
   - attach container
-`docker-compose run --rm app bash`
+  
+    `docker-compose run --rm app bash`
 
   - run command below
-`./bin/webpack-dev-server`
+  
+    `./bin/webpack-dev-server`
 
 - how to use rubocop auto correct
 
-`bundle exec rubocop -A --only HogeHoge`
+  `bundle exec rubocop -A --only HogeHoge`
 
-https://stackoverflow.com/questions/62984228/rubocop-autocorrect-for-frozenstringliteralcomment-not-working
+  https://stackoverflow.com/questions/62984228/rubocop-autocorrect-for-frozenstringliteralcomment-not-working
