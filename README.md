@@ -31,3 +31,9 @@ if you want to activate webpack-dev-server
 - run command below
 
 > ./bin/webpack-dev-server
+
+* how to use rubocop auto correct
+
+> bundle exec rubocop -A --only HogeHoge
+
+https://stackoverflow.com/questions/62984228/rubocop-autocorrect-for-frozenstringliteralcomment-not-working
