@@ -11,29 +11,28 @@
   - docker
   - circleCI
 
-* Ruby version
+- Ruby version
 
-2.7.1
+  - 2.7.1
 
-* Rails version
+- Rails version
 
-6.0.3.2
+  - 6.0.3.2
 
-* Setup
+- Setup
 
-> docker-compose up
+`docker-compose up`
 
 if you want to activate webpack-dev-server
 
-- attach container
-> docker-compose run --rm app bash
+  - attach container
+`docker-compose run --rm app bash`
 
-- run command below
+  - run command below
+`./bin/webpack-dev-server`
 
-> ./bin/webpack-dev-server
+- how to use rubocop auto correct
 
-* how to use rubocop auto correct
-
-> bundle exec rubocop -A --only HogeHoge
+`bundle exec rubocop -A --only HogeHoge`
 
 https://stackoverflow.com/questions/62984228/rubocop-autocorrect-for-frozenstringliteralcomment-not-working
