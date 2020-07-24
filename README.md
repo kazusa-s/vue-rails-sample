@@ -23,13 +23,13 @@
 
   `docker-compose up`
 
-if you want to activate webpack-dev-server
+- how to activate webpack-dev-server
 
-  - attach container
+  - (1) attach container
   
     `docker-compose run --rm app bash`
 
-  - run command below
+  - (2) run command below
   
     `./bin/webpack-dev-server`
 
