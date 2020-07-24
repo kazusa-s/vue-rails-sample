@@ -6,7 +6,7 @@
 export default {
   data: function () {
     return {
-      text: "please enjoy rails and vue world"
+      text: "enjoy rails and vue world!!"
     }
   }
 }
