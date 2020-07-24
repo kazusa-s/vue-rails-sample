@@ -36,7 +36,7 @@ jobs:
           name: bundle install
           command: |
             bundle config set path "vendor/bundle"
-            bundle check || bundle instal
+            bundle check || bundle instal --jobs=4 --retry=3
       - save_cache:
           key: rails-dependency-gem-{{ checksum "Gemfile.lock" }}
           paths:
