@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- This project initially icludes
 
-Things you may want to cover:
+  - Ruby 
+  - Ruby on Rails
+  - webpacker
+  - rubocop
+  - rspec
+  - vuejs
+  - docker
+  - circleCI
 
 * Ruby version
 
-* System dependencies
+2.7.1
 
-* Configuration
+* Rails version
 
-* Database creation
+6.0.3.2
 
-* Database initialization
+* Setup
 
-* How to run the test suite
+> docker-compose up
 
-* Services (job queues, cache servers, search engines, etc.)
+if you want to activate webpack-dev-server
 
-* Deployment instructions
+- attach container
+> docker-compose run --rm app bash
 
-* ...
+- run command below
+
+> ./bin/webpack-dev-server
+
+* how to use rubocop auto correct
+
+> bundle exec rubocop -A --only HogeHoge
+
+https://stackoverflow.com/questions/62984228/rubocop-autocorrect-for-frozenstringliteralcomment-not-working
